@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Generala — La Virgen de la Fuensanta | Película</title>
+  <meta name="description" content="Por primera vez, la historia de la Virgen de la Fuensanta, patrona de Murcia, se llevará a la gran pantalla. Descubre La Generala.">
+
+  <!-- Open Graph / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="La Generala — La Virgen de la Fuensanta">
+  <meta property="og:description" content="Murcia va a tener su propia película sobre la Virgen de la Fuensanta. Descubre «La Generala».">
+  <meta property="og:image" content="assets/img/og-image.png">
+  <meta property="og:url" content="">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="La Generala — La Virgen de la Fuensanta">
+  <meta name="twitter:description" content="Se salva ella o morimos todos. La película sobre la patrona de Murcia.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3D3D32',
+            gold: '#C6A94D',
+            'gold-muted': '#A8903F',
+            cream: '#F5F0E6',
+            burgundy: '#6B2D3E',
+            'dark-text': '#2A2A22',
+          },
+          fontFamily: {
+            script: ['Pinyon Script', 'cursive'],
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Parallax */
+    .parallax-bg {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    @media (max-width: 768px) {
+      .parallax-bg { background-attachment: scroll; }
+    }
+
+    /* Gold gradient divider */
+    .divider-gold {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C6A94D, transparent);
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .parallax-bg { background-attachment: scroll; }
+    }
+
+    /* Timeline connector */
+    .timeline-line {
+      background: linear-gradient(90deg, #C6A94D, #C6A94D);
+    }
+
+    /* Placeholder images */
+    .img-placeholder {
+      background: linear-gradient(135deg, #3D3D32 0%, #2A2A22 50%, #4a4a3d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C6A94D;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .img-placeholder-light {
+      background: linear-gradient(135deg, #e8e0d0 0%, #F5F0E6 50%, #ddd5c5 100%);
+      color: #6B2D3E;
+    }
+
+    /* Hero overlay gradient */
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(42, 42, 34, 0.3) 0%,
+        rgba(42, 42, 34, 0.6) 40%,
+        rgba(42, 42, 34, 0.85) 70%,
+        rgba(42, 42, 34, 0.95) 100%
+      );
+    }
+
+    /* Hero single image — contain strategy */
+    .hero-img-contain {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    @media (min-width: 1024px) {
+      .hero-img-contain {
+        object-fit: contain;
+        object-position: center center;
+      }
+    }
+    /* Fade edges on desktop when contain leaves gaps */
+    .hero-edge-fade {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .hero-edge-fade {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 30%;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .hero-edge-fade-left {
+        left: 0;
+        background: linear-gradient(to right, #3D3D32 0%, #3D3D32 20%, transparent 100%);
+      }
+      .hero-edge-fade-right {
+        right: 0;
+        background: linear-gradient(to left, #3D3D32 0%, #3D3D32 20%, transparent 100%);
+      }
+    }
+
+    /* Input focus glow */
+    .input-glow:focus {
+      box-shadow: 0 0 0 3px rgba(198, 169, 77, 0.3);
+    }
+
+    /* Button hover transitions */
+    .btn-hover {
+      transition: all 250ms ease;
+    }
+
+    /* Subtle texture for dark sections */
+    .texture-dark {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="bg-cream font-sans text-dark-text antialiased">
+
+  <!-- ============================================ -->
+  <!-- SECTION 1: HERO — Cinematic Movie Poster     -->
+  <!-- ============================================ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
+    <!-- Background Image (original composite) -->
+    <div class="absolute inset-0">
+      <img src="assets/img/hero-bg.png" alt="La Virgen de la Fuensanta iluminada en la oscuridad con luz divina dorada" class="hero-img-contain" loading="eager">
+    </div>
+
+    <!-- Edge fades (desktop only, hide contain gaps) -->
+    <div class="hero-edge-fade hero-edge-fade-left"></div>
+    <div class="hero-edge-fade hero-edge-fade-right"></div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-screen py-16">
+      <!-- Spacer for vertical centering -->
+      <div class="flex-1"></div>
+
+      <!-- Subtitle above title -->
+      <p class="font-serif text-gold-muted text-lg md:text-2xl tracking-wide mb-2 md:mb-4">
+        La Virgen de la Fuensanta
+      </p>
+
+      <!-- Title -->
+      <h1 class="font-script text-gold text-6xl md:text-8xl lg:text-[7rem] leading-tight mb-6 md:mb-8 drop-shadow-lg">
+        La Generala
+      </h1>
+
+      <!-- Tagline -->
+      <p class="font-sans text-cream text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-10 md:mb-14">
+        Se salva ella o morimos todos
+      </p>
+
+      <div class="flex-1"></div>
+
+      <!-- CTA -->
+      <a href="#fe"
+         class="btn-hover inline-block border border-gold text-gold px-8 py-4 md:px-10 md:py-4 font-sans text-sm font-medium tracking-[0.15em] uppercase hover:bg-gold hover:text-primary cursor-pointer mb-12 md:mb-16 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-primary"
+         aria-label="Descubre la historia de La Generala">
+        Descubre la historia
+      </a>
+    </div>
+
+    <!-- Share Icons — Vertical (desktop) / Horizontal (mobile) -->
+    <div class="absolute right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-4 z-20" aria-label="Compartir en redes sociales">
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer" aria-label="Compartir en WhatsApp">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer" aria-label="Compartir en Facebook">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer" aria-label="Compartir en Instagram">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer" aria-label="Compartir en X">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+
+    <!-- Mobile share row -->
+    <div class="absolute bottom-4 left-0 right-0 flex md:hidden justify-center gap-6 z-20" aria-label="Compartir en redes sociales">
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer p-2" aria-label="Compartir en WhatsApp">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer p-2" aria-label="Compartir en Facebook">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer p-2" aria-label="Compartir en Instagram">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="#compartir" class="btn-hover text-cream/60 hover:text-gold cursor-pointer p-2" aria-label="Compartir en X">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: ¿QUÉ ES LA FE? — Gancho emocional -->
+  <!-- ============================================ -->
+  <section id="fe" class="bg-primary texture-dark py-20 md:py-32 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="fade-in font-serif italic text-gold text-3xl md:text-5xl lg:text-[3.25rem] mb-10 md:mb-14 leading-snug">
+        ¿Qué es la fe?
+      </h2>
+
+      <p class="fade-in font-sans text-cream/90 text-base md:text-lg leading-relaxed md:leading-loose mb-8">
+        Hace siglos, una sequía amenazaba con destruir la huerta murciana. Sacaron a la Virgen de la Fuensanta en procesión, rogando que salvara los cultivos y paliara la sed del pueblo. Durante el recorrido, una lluvia abundante se dejó caer por toda la Región. Desde entonces, La Fuensanta no es solo una imagen. Es el corazón de Murcia. Es nuestra Generala.
+      </p>
+
+      <p class="fade-in font-sans text-cream/70 text-sm md:text-base leading-relaxed mb-12">
+        Por primera vez en la historia, su leyenda se llevará a la gran pantalla.
+      </p>
+
+      <div class="fade-in divider-gold max-w-48 mx-auto"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: LA PELÍCULA — Sinopsis            -->
+  <!-- ============================================ -->
+  <section id="pelicula" class="bg-cream py-20 md:py-28 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="fade-in font-serif text-dark-text text-3xl md:text-5xl font-semibold mb-12 md:mb-16">
+        La Película
+      </h2>
+
+      <div class="flex flex-col md:flex-row gap-10 md:gap-16 items-center mb-16">
+        <!-- Text (60%) -->
+        <div class="w-full md:w-3/5 order-2 md:order-1">
+          <p class="fade-in font-sans text-dark-text/90 text-base md:text-lg leading-relaxed mb-6">
+            Julia Vidal es historiadora. Es atea. Está decidida a demostrar que la leyenda de la Virgen de la Fuensanta no es más que eso: una leyenda. Pero cuanto más investiga sus remotos orígenes y la veracidad de sus milagros, más sucesos inexplicables se cruzan en su camino.
+          </p>
+          <p class="fade-in font-sans text-dark-text/90 text-base md:text-lg leading-relaxed">
+            Contrario a lo que ella espera, su investigación la lleva a cuestionarse lo más profundo de su vida personal, arrastrándola del escepticismo basado en la ciencia a la apertura de vivencias que no se pueden explicar con la mera razón.
+          </p>
+        </div>
+
+        <!-- Image (40%) -->
+        <div class="w-full md:w-2/5 order-1 md:order-2">
+          <div class="fade-in aspect-[3/4] rounded-sm shadow-xl overflow-hidden">
+            <img src="assets/img/julia-archivo.png" alt="Julia Vidal investigando en un archivo eclesiástico antiguo, rodeada de libros y velas" class="w-full h-full object-cover" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Ficha Técnica -->
+      <div class="fade-in border-t border-gold/30 pt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-sans text-sm">
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Género</span>
+            <p class="text-dark-text mt-1">Drama Histórico Religioso</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Duración</span>
+            <p class="text-dark-text mt-1">120 minutos</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Clasificación</span>
+            <p class="text-dark-text mt-1">Todos los públicos</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Dirección</span>
+            <p class="text-dark-text mt-1">Jorge Araujo</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Guión</span>
+            <p class="text-dark-text mt-1">Jorge Araujo e Inocencia Vidal</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Fotografía</span>
+            <p class="text-dark-text mt-1">Sergei Saldivar</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Producción</span>
+            <p class="text-dark-text mt-1">Blanca Saiz / Blanco and White</p>
+          </div>
+          <div>
+            <span class="text-gold-muted font-medium uppercase tracking-wider text-xs">Co-producción</span>
+            <p class="text-dark-text mt-1">Isabel Esparcia / Alcornoque Films</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 4: LA GENERALA DE MURCIA — Núcleo    -->
+  <!-- ============================================ -->
+  <section id="generala" class="relative py-24 md:py-36 px-4 overflow-hidden">
+    <!-- Parallax Background -->
+    <div class="absolute inset-0 parallax-bg" style="background-image: url('assets/img/santuario-bg.png');">
+    </div>
+    <div class="absolute inset-0 bg-primary/85"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      <h2 class="fade-in font-serif text-gold text-3xl md:text-5xl lg:text-[3.25rem] font-semibold mb-12 md:mb-16 leading-snug">
+        La Generala de Murcia
+      </h2>
+
+      <p class="fade-in font-sans text-cream/90 text-base md:text-lg leading-relaxed mb-8">
+        La Virgen de la Fuensanta es la patrona de Murcia desde el siglo XVII. Para el pueblo murciano es, desde siempre, «La Generala».
+      </p>
+
+      <p class="fade-in font-sans text-cream/80 text-base md:text-lg leading-relaxed mb-8">
+        Su historia atraviesa siglos de fe, tradición e identidad. Cuenta la leyenda que la Virgen se apareció en el monte de Algezares haciendo brotar un manantial de agua milagrosa. Allí se edificó su Santuario, donde su imagen ha sido venerada durante generaciones.
+      </p>
+
+      <p class="fade-in font-sans text-cream/80 text-base md:text-lg leading-relaxed mb-8">
+        Miles de personas la acompañan cada año en procesión. El respeto y el amor que emana de los corazones de los fieles se manifiesta a través de gritos de alabanza y miles de pétalos arrojados a su paso. Desde los balcones se escucha: «¡Guapa! ¡Viva la Virgen que nos cubre con su manto!» Y la multitud a coro responde: «¡Viva!»
+      </p>
+
+      <p class="fade-in font-serif italic text-gold text-xl md:text-2xl mt-12 mb-16">
+        Por primera vez, su historia se contará en la gran pantalla.
+      </p>
+
+      <!-- Timeline -->
+      <div class="fade-in relative mt-16 md:mt-24">
+        <!-- Line -->
+        <div class="hidden md:block absolute top-6 left-0 right-0 h-px bg-gold/40"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <!-- Siglo XVII -->
+          <div class="text-center relative">
+            <div class="w-3 h-3 bg-gold rounded-full mx-auto mb-4 relative z-10"></div>
+            <p class="font-serif text-gold text-xl md:text-2xl font-semibold mb-2">Siglo XVII</p>
+            <p class="font-sans text-cream/70 text-sm leading-relaxed">Aparición de la Virgen. Nace la leyenda del manantial milagroso</p>
+          </div>
+
+          <!-- 1694 -->
+          <div class="text-center relative">
+            <div class="w-3 h-3 bg-gold rounded-full mx-auto mb-4 relative z-10"></div>
+            <p class="font-serif text-gold text-xl md:text-2xl font-semibold mb-2">1694</p>
+            <p class="font-sans text-cream/70 text-sm leading-relaxed">Proclamada patrona oficial de Murcia tras el milagro de la lluvia</p>
+          </div>
+
+          <!-- Hoy -->
+          <div class="text-center relative">
+            <div class="w-3 h-3 bg-gold rounded-full mx-auto mb-4 relative z-10"></div>
+            <p class="font-serif text-gold text-xl md:text-2xl font-semibold mb-2">Hoy</p>
+            <p class="font-sans text-cream/70 text-sm leading-relaxed">Miles de murcianos la veneran en procesión cada año</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 5: COMPARTIR — Conversión principal  -->
+  <!-- ============================================ -->
+  <section id="compartir" class="bg-primary texture-dark py-20 md:py-28 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="fade-in font-serif text-gold text-3xl md:text-5xl font-semibold mb-4 leading-snug">
+        Murcia merece esta película
+      </h2>
+
+      <p class="fade-in font-serif text-cream/80 text-xl md:text-2xl mb-4">
+        Ayúdanos a que todo el mundo lo sepa
+      </p>
+
+      <p class="fade-in font-sans text-cream/60 text-base mb-12">
+        Comparte con tu familia, tus amigos, tu peña. Que se corra la voz.
+      </p>
+
+      <!-- Share Buttons -->
+      <div class="fade-in flex flex-wrap justify-center gap-4 mb-16">
+        <!-- WhatsApp (larger) -->
+        <a id="share-whatsapp"
+           href="#"
+           class="btn-hover flex items-center gap-3 bg-primary border border-gold text-cream px-6 py-4 font-sans text-sm font-medium tracking-wider hover:bg-gold hover:text-primary cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold"
+           aria-label="Compartir por WhatsApp">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+
+        <!-- Facebook -->
+        <a id="share-facebook"
+           href="#"
+           class="btn-hover flex items-center gap-3 bg-primary border border-gold/60 text-cream/80 px-5 py-3 font-sans text-sm font-medium tracking-wider hover:bg-gold hover:text-primary cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold"
+           aria-label="Compartir en Facebook">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+
+        <!-- Instagram -->
+        <a href="#"
+           class="btn-hover flex items-center gap-3 bg-primary border border-gold/60 text-cream/80 px-5 py-3 font-sans text-sm font-medium tracking-wider hover:bg-gold hover:text-primary cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold"
+           aria-label="Compartir en Instagram">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
+        </a>
+
+        <!-- X/Twitter -->
+        <a id="share-x"
+           href="#"
+           class="btn-hover flex items-center gap-3 bg-primary border border-gold/60 text-cream/80 px-5 py-3 font-sans text-sm font-medium tracking-wider hover:bg-gold hover:text-primary cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold"
+           aria-label="Compartir en X">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+      </div>
+
+      <!-- Email Form -->
+      <div class="fade-in max-w-xl mx-auto">
+        <p class="font-sans text-cream/70 text-sm md:text-base mb-6">
+          Déjanos tu email y sé el primero en saber la fecha de estreno
+        </p>
+
+        <form id="email-form" class="flex flex-col sm:flex-row gap-3" onsubmit="handleEmailSubmit(event)">
+          <label for="email-input" class="sr-only">Tu email</label>
+          <input
+            id="email-input"
+            type="email"
+            required
+            placeholder="tu@email.com"
+            class="input-glow flex-1 bg-cream/10 border border-gold text-cream px-5 py-4 font-sans text-base placeholder:text-cream/40 focus:outline-none focus:border-cream min-h-[48px]"
+            autocomplete="email"
+          >
+          <button
+            type="submit"
+            class="btn-hover bg-gold text-primary px-8 py-4 font-sans text-sm font-semibold tracking-[0.1em] uppercase hover:bg-gold-muted cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-primary whitespace-nowrap"
+          >
+            Quiero enterarme
+          </button>
+        </form>
+
+        <p id="form-success" class="hidden font-sans text-gold text-sm mt-4">
+          ¡Gracias! Te avisaremos en cuanto haya novedades.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 6: QUIÉN ESTÁ DETRÁS — Equipo       -->
+  <!-- ============================================ -->
+  <section id="equipo" class="bg-cream py-20 md:py-28 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="fade-in font-serif text-dark-text text-3xl md:text-5xl font-semibold text-center mb-14 md:mb-20">
+        Quién está detrás
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+        <!-- Blanca Saiz -->
+        <div class="fade-in text-center">
+          <div class="w-32 h-32 md:w-36 md:h-36 rounded-full mx-auto mb-6 img-placeholder-light overflow-hidden">
+            <!-- <img src="assets/img/blanca-saiz.jpg" alt="Blanca Saiz" class="w-full h-full object-cover"> -->
+            <span class="text-xs">Foto</span>
+          </div>
+          <h3 class="font-serif text-dark-text text-xl md:text-2xl font-semibold mb-1">Blanca Saiz</h3>
+          <p class="font-sans text-gold-muted text-sm font-medium uppercase tracking-wider mb-3">Productora</p>
+          <p class="font-sans text-dark-text/70 text-sm leading-relaxed">
+            Productora ejecutiva en Blanco and White. «Sicarius la noche y el silencio», «Todo Mujer»
+          </p>
+        </div>
+
+        <!-- Isabel Esparcia -->
+        <div class="fade-in text-center">
+          <div class="w-32 h-32 md:w-36 md:h-36 rounded-full mx-auto mb-6 img-placeholder-light overflow-hidden">
+            <!-- <img src="assets/img/isabel-esparcia.jpg" alt="Isabel Esparcia" class="w-full h-full object-cover"> -->
+            <span class="text-xs">Foto</span>
+          </div>
+          <h3 class="font-serif text-dark-text text-xl md:text-2xl font-semibold mb-1">Isabel Esparcia</h3>
+          <p class="font-sans text-gold-muted text-sm font-medium uppercase tracking-wider mb-3">Co-Productora</p>
+          <p class="font-sans text-dark-text/70 text-sm leading-relaxed">
+            Fundadora de Alcornoque Films. «El Embrujo de Quijat», «La Otra Orilla»
+          </p>
+        </div>
+
+        <!-- Jorge Araujo -->
+        <div class="fade-in text-center">
+          <div class="w-32 h-32 md:w-36 md:h-36 rounded-full mx-auto mb-6 img-placeholder-light overflow-hidden">
+            <!-- <img src="assets/img/jorge-araujo.jpg" alt="Jorge Araujo" class="w-full h-full object-cover"> -->
+            <span class="text-xs">Foto</span>
+          </div>
+          <h3 class="font-serif text-dark-text text-xl md:text-2xl font-semibold mb-1">Jorge Araujo</h3>
+          <p class="font-sans text-gold-muted text-sm font-medium uppercase tracking-wider mb-3">Director y Guionista</p>
+          <p class="font-sans text-dark-text/70 text-sm leading-relaxed">
+            35 años de trayectoria. 41 largometrajes. Nominado a la Diosa de Plata
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 7: APOYA EL PROYECTO — Donación     -->
+  <!-- ============================================ -->
+  <section id="apoya" class="bg-primary texture-dark py-20 md:py-28 px-4">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="fade-in font-serif text-gold text-2xl md:text-4xl font-semibold mb-6 leading-snug">
+        ¿Quieres formar parte de La Generala?
+      </h2>
+
+      <p class="fade-in font-sans text-cream/70 text-base md:text-lg leading-relaxed mb-10">
+        Si esta historia te emociona tanto como a nosotros, puedes contribuir a hacerla realidad. Cada aportación cuenta.
+      </p>
+
+      <a href="#"
+         class="fade-in btn-hover inline-block bg-gold text-primary px-10 py-4 font-sans text-sm font-semibold tracking-[0.1em] uppercase hover:bg-gold-muted cursor-pointer min-h-[48px] focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-primary">
+        Colaborar con el proyecto
+      </a>
+
+      <p class="fade-in font-sans text-cream/40 text-xs mt-6 tracking-wide">
+        Tu nombre aparecerá en los créditos de la película
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 8: FOOTER                            -->
+  <!-- ============================================ -->
+  <footer class="bg-[#2A2A22] py-14 md:py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Reference line -->
+      <p class="font-serif italic text-cream/40 text-sm md:text-base mb-10">
+        En la tradición de películas como Fátima, La Aparición y El Caso de Cristo
+      </p>
+
+      <div class="divider-gold max-w-32 mx-auto mb-10"></div>
+
+      <!-- Production logos -->
+      <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-10">
+        <span class="font-sans text-cream/50 text-xs tracking-widest uppercase">Blanco and White</span>
+        <span class="text-gold/30">·</span>
+        <span class="font-sans text-cream/50 text-xs tracking-widest uppercase">Alcornoque Films</span>
+        <span class="text-gold/30">·</span>
+        <span class="font-sans text-cream/50 text-xs tracking-widest uppercase">La Generala Films</span>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex justify-center gap-6 mb-8">
+        <a href="#" class="btn-hover text-cream/40 hover:text-gold cursor-pointer p-1" aria-label="Instagram">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" class="btn-hover text-cream/40 hover:text-gold cursor-pointer p-1" aria-label="Facebook">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="#" class="btn-hover text-cream/40 hover:text-gold cursor-pointer p-1" aria-label="X / Twitter">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+
+      <!-- Contact -->
+      <p class="font-sans text-cream/40 text-sm mb-6">
+        <a href="mailto:contacto@lageneralafilm.com" class="btn-hover hover:text-gold cursor-pointer">contacto@lageneralafilm.com</a>
+      </p>
+
+      <!-- Legal -->
+      <div class="flex justify-center gap-6 font-sans text-cream/30 text-xs">
+        <a href="#" class="btn-hover hover:text-cream/60 cursor-pointer">Legal</a>
+        <a href="#" class="btn-hover hover:text-cream/60 cursor-pointer">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS                                       -->
+  <!-- ============================================ -->
+  <script>
+    // ---- Fade-in on scroll (IntersectionObserver) ----
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    });
+
+    // ---- WhatsApp share with pre-filled text ----
+    const SHARE_TEXT = 'Murcia va a tener su propia película sobre la Virgen de la Fuensanta 🎬 Descubre «La Generala»:';
+    const SHARE_URL = window.location.href;
+
+    const whatsappBtn = document.getElementById('share-whatsapp');
+    if (whatsappBtn) {
+      whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL)}`;
+      whatsappBtn.target = '_blank';
+      whatsappBtn.rel = 'noopener noreferrer';
+    }
+
+    const facebookBtn = document.getElementById('share-facebook');
+    if (facebookBtn) {
+      facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_URL)}`;
+      facebookBtn.target = '_blank';
+      facebookBtn.rel = 'noopener noreferrer';
+    }
+
+    const xBtn = document.getElementById('share-x');
+    if (xBtn) {
+      xBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`;
+      xBtn.target = '_blank';
+      xBtn.rel = 'noopener noreferrer';
+    }
+
+    // ---- Email form handler ----
+    function handleEmailSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email-input').value;
+      const form = document.getElementById('email-form');
+      const success = document.getElementById('form-success');
+
+      // In production, replace with actual form submission (e.g., Mailchimp, ConvertKit, WordPress AJAX)
+      console.log('Email submitted:', email);
+
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
